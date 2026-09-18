@@ -1,0 +1,82 @@
+[
+  {
+    "timestamp": "17/09/2026 10:30:00",
+    "tipo": "Buraco na via",
+    "descricao": "Buraco grande na pista, próximo ao ponto de ônibus",
+    "cep": "55158-520",
+    "referencia": "Próximo à padaria do Zé",
+    "gravidade": "4",
+    "latitude": "-8.3440",
+    "longitude": "-36.4130"
+  },
+  {
+    "timestamp": "17/09/2026 11:15:00",
+    "tipo": "Lixo acumulado",
+    "descricao": "Lixo acumulado na esquina há vários dias",
+    "cep": "55158-660",
+    "referencia": "Esquina da Av. da Integração",
+    "gravidade": "3",
+    "latitude": "-8.3442",
+    "longitude": "-36.4091"
+  },
+  {
+    "timestamp": "16/09/2026 09:00:00",
+    "tipo": "Iluminação pública",
+    "descricao": "Poste sem lâmpada, rua escura à noite",
+    "cep": "55158-770",
+    "referencia": "Em frente à escola municipal",
+    "gravidade": "5",
+    "latitude": "-8.3425",
+    "longitude": "-36.4113"
+  },
+  {
+    "timestamp": "16/09/2026 14:30:00",
+    "tipo": "Esgoto a céu aberto",
+    "descricao": "Esgoto vazando na calçada",
+    "cep": "55158-090",
+    "referencia": "Ao lado do mercado",
+    "gravidade": "5",
+    "latitude": "-8.3433",
+    "longitude": "-36.4207"
+  },
+  {
+    "timestamp": "15/09/2026 16:00:00",
+    "tipo": "Calçada danificada",
+    "descricao": "Calçada quebrada dificultando a passagem de cadeirantes",
+    "cep": "55158-520",
+    "referencia": "Próximo à praça da Cohab",
+    "gravidade": "4",
+    "latitude": "-8.3438",
+    "longitude": "-36.4145"
+  },
+  {
+    "timestamp": "15/09/2026 10:45:00",
+    "tipo": "Buraco na via",
+    "descricao": "Vários buracos na rua, pneu do carro estourou",
+    "cep": "55158-660",
+    "referencia": "Rua principal da Cohab I",
+    "gravidade": "5",
+    "latitude": "-8.3448",
+    "longitude": "-36.4105"
+  },
+  {
+    "timestamp": "14/09/2026 08:20:00",
+    "tipo": "Mato alto",
+    "descricao": "Terreno baldio com mato alto, acumulando lixo",
+    "cep": "55158-090",
+    "referencia": "Terreno ao lado do campo",
+    "gravidade": "3",
+    "latitude": "-8.3430",
+    "longitude": "-36.4180"
+  },
+  {
+    "timestamp": "14/09/2026 13:10:00",
+    "tipo": "Falta de sinalização",
+    "descricao": "Cruzamento sem placa de pare, já houve acidentes",
+    "cep": "55158-770",
+    "referencia": "Cruzamento próximo à igreja",
+    "gravidade": "4",
+    "latitude": "-8.3420",
+    "longitude": "-36.4125"
+  }
+]
