@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mapa Interativo do Bairro Cohab — Jardim Digital 2026. Painel de ocorrências urbanas com mapa e gráficos em tempo real.">
+  <title>Mapa Interativo — Jardim Digital 2026 | IFPE Belo Jardim</title>
+
+  <!-- ========== CDNs ========== -->
+  <!-- Leaflet.js 1.9 — biblioteca de mapa interativo -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+
+  <!-- Chart.js 4.x — gráficos interativos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+  <!-- Estilos do painel -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ===== Banner Offline (modo contingência) ===== -->
+    <div id="offline-banner" class="offline-banner" role="alert">
+      <span class="offline-banner__icon">⚠️</span>
+      <span>Modo Offline — exibindo dados de teste. A conexão será tentada novamente automaticamente.</span>
+    </div>
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+      <div class="header__brand">
+        <div class="header__icon">🗺️</div>
+        <div>
+          <div class="header__title">Mapa Interativo do Bairro</div>
+          <div class="header__subtitle">Jardim Digital 2026 · IFPE Campus Belo Jardim</div>
+        </div>
+      </div>
+
+      <div class="header__stats">
+        <!-- Contadores -->
+        <div class="stat-card">
+          <span class="stat-card__value" id="stat-count">0</span>
+          <span class="stat-card__label">Ocorrências</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__value" id="stat-tipos">0</span>
+          <span class="stat-card__label">Categorias</span>
+        </div>
+
+        <!-- Status de conexão -->
+        <div class="status-indicator" id="status-indicator">
+          <span class="status-indicator__dot"></span>
+          <span id="status-text">Ao vivo</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== Conteúdo principal ===== -->
+    <main class="main-content">
+
+      <!-- Mapa Leaflet -->
+      <section class="map-container" aria-label="Mapa de ocorrências">
+        <div id="map"></div>
+      </section>
+
+      <!-- Sidebar com gráficos -->
+      <aside class="sidebar" aria-label="Estatísticas e gráficos">
+
+        <!-- Legenda de categorias -->
+        <div class="sidebar__card">
+          <h2 class="sidebar__card-title">Categorias</h2>
+          <div id="legend-container" class="legend">
+            <!-- Preenchido dinamicamente pelo JS -->
+          </div>
+        </div>
+
+        <!-- Gráfico: Ocorrências por tipo -->
+        <div class="sidebar__card">
+          <h2 class="sidebar__card-title">Ocorrências por Tipo</h2>
+          <div class="chart-wrapper" style="height: 220px;">
+            <canvas id="chart-tipo"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico: Ocorrências por dia -->
+        <div class="sidebar__card">
+          <h2 class="sidebar__card-title">Ocorrências por Dia</h2>
+          <div class="chart-wrapper" style="height: 200px;">
+            <canvas id="chart-dia"></canvas>
+          </div>
+        </div>
+
+      </aside>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+      <div class="footer__credits">
+        <span>🌱</span>
+        <span>Jardim Digital 2026 — IFPE Campus Belo Jardim</span>
+      </div>
+      <div class="footer__update" id="last-update">
+        Aguardando dados...
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Lógica do painel -->
+  <script src="app.js"></script>
+
+</body>
+</html>
