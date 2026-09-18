@@ -10,32 +10,30 @@
 /* ---------- Design Tokens (fáceis de personalizar) ---------- */
 :root {
   /* Cores primárias */
-  --bg-primary:    #0a0f18;
-  --bg-secondary:  #111927;
-  --bg-card:       rgba(17, 25, 39, 0.75);
-  --bg-card-hover: rgba(17, 25, 39, 0.90);
+  --bg-primary:    #1c1917;
+  --bg-secondary:  #24211e;
+  --bg-card:       #29241f;
+  --bg-card-hover: #322c26;
 
   /* Acentos */
-  --accent:        #00d4aa;
-  --accent-glow:   rgba(0, 212, 170, 0.25);
-  --accent-dim:    rgba(0, 212, 170, 0.10);
+  --accent:        #c2542f;
+  --accent-glow:   transparent;
+  --accent-dim:    rgba(194, 84, 47, 0.12);
 
   /* Texto */
-  --text-primary:   #e8edf5;
-  --text-secondary: #8896ab;
-  --text-muted:     #4a5568;
+  --text-primary:   #f2ece4;
+  --text-secondary: #a89f92;
+  --text-muted:     #6b6259;
 
   /* Status */
-  --status-online:  #00d4aa;
-  --status-offline: #ff6b6b;
-  --status-warning: #ffc145;
+  --status-online:  #7a9b5c;
+  --status-offline: #b5482f;
+  --status-warning: #cf9a3e;
 
   /* Superfícies */
-  --border-color:     rgba(255, 255, 255, 0.06);
-  --border-highlight: rgba(0, 212, 170, 0.20);
-  --glass-blur:       16px;
-  --shadow-card:      0 4px 24px rgba(0, 0, 0, 0.40);
-  --shadow-glow:      0 0 30px rgba(0, 212, 170, 0.08);
+  --border-color:     rgba(242, 236, 228, 0.08);
+  --border-highlight: rgba(194, 84, 47, 0.30);
+  --shadow-card:      0 4px 12px rgba(0, 0, 0, 0.15);
 
   /* Layout */
   --header-height: 70px;
@@ -129,23 +127,21 @@ body {
 .header__icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--accent), #00b894);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  box-shadow: 0 0 20px var(--accent-glow);
+  color: var(--accent);
 }
 
 .header__title {
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--text-primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .header__subtitle {
@@ -169,7 +165,6 @@ body {
   gap: 10px;
   padding: 8px 16px;
   background: var(--bg-card);
-  backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   transition: border-color var(--transition-fast);
@@ -189,9 +184,7 @@ body {
 .stat-card__label {
   font-size: 0.7rem;
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Indicador de status (online/offline) */
@@ -201,13 +194,10 @@ body {
   gap: 8px;
   padding: 8px 16px;
   background: var(--bg-card);
-  backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .status-indicator__dot {
@@ -215,18 +205,16 @@ body {
   height: 8px;
   border-radius: 50%;
   background: var(--status-online);
-  box-shadow: 0 0 8px var(--status-online);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 .status-indicator--offline .status-indicator__dot {
   background: var(--status-offline);
-  box-shadow: 0 0 8px var(--status-offline);
   animation: pulse-dot-warn 1.5s ease-in-out infinite;
 }
 
 .status-indicator--offline {
-  border-color: rgba(255, 107, 107, 0.3);
+  border-color: var(--border-color);
   color: var(--status-offline);
 }
 
@@ -281,7 +269,7 @@ body {
 
 /* Inverter tiles para efeito dark mode (OSM → dark) */
 .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(1.1) saturate(0.3);
+  filter: none;
 }
 
 /* Re-inverter os marcadores, popups e controles para não ficarem negativos */
@@ -412,7 +400,6 @@ body {
 
 .sidebar__card {
   background: var(--bg-card);
-  backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   padding: 20px;
@@ -422,7 +409,7 @@ body {
 
 .sidebar__card:hover {
   border-color: var(--border-highlight);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-card);
 }
 
 .sidebar__card:nth-child(1) { animation-delay: 0.05s; }
@@ -514,12 +501,11 @@ body {
   justify-content: center;
   gap: 10px;
   padding: 10px 20px;
-  background: linear-gradient(90deg, rgba(255,107,107,0.15), rgba(255,107,107,0.05));
-  border-bottom: 1px solid rgba(255,107,107,0.2);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
   color: var(--status-offline);
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
   animation: slideDown 0.3s ease-out;
   z-index: 999;
 }

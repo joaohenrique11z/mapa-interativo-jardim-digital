@@ -56,45 +56,60 @@ const COLUMN_MAP = {
  * Chaves são normalizadas (minúsculas, sem acentos).
  */
 const CATEGORY_COLORS = {
-  'buraco na via':                '#e74c3c',
-  'iluminacao publica':           '#f1c40f',
-  'iluminação pública':           '#f1c40f',
-  'lixo acumulado':               '#e67e22',
-  'esgoto a ceu aberto':          '#8e44ad',
-  'esgoto a céu aberto':         '#8e44ad',
-  'calcada danificada':           '#3498db',
-  'calçada danificada':           '#3498db',
-  'falta de sinalizacao':         '#1abc9c',
-  'falta de sinalização':         '#1abc9c',
-  'alagamento':                   '#2980b9',
-  'mato alto':                    '#27ae60',
-  'poluicao sonora':              '#e91e63',
-  'poluição sonora':              '#e91e63',
-  'abandono de imovel':           '#ff9800',
-  'abandono de imóvel':           '#ff9800',
+  'buraco na via':          '#c2542f',
+  'iluminacao publica':     '#cf9a3e',
+  'iluminação pública':     '#cf9a3e',
+  'lixo acumulado':         '#8a6a4a',
+  'esgoto a ceu aberto':    '#5c6b6f',
+  'esgoto a céu aberto':   '#5c6b6f',
+  'calcada danificada':     '#9b7653',
+  'calçada danificada':     '#9b7653',
+  'falta de sinalizacao':   '#7a9b5c',
+  'falta de sinalização':   '#7a9b5c',
+  'alagamento':             '#4a6b7a',
+  'mato alto':              '#7a8a4a',
+  'area de risco / inseguranca': '#b5482f',
+  "falta d'agua":           '#5c7a8a',
+  'assalto':                '#8a2f2f',
+  'abandono de imovel':     '#b5482f',
+  'abandono de imóvel':     '#b5482f',
 };
-const DEFAULT_COLOR = '#95a5a6';
+const DEFAULT_COLOR = '#6b6259';
+
+const svgs = {
+  buraco: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>`,
+  luz: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 6a6 6 0 0 1 6 6c0 1.66-1.34 3-3 3H9c-1.66 0-3-1.34-3-3a6 6 0 0 1 6-6z"/></svg>`,
+  lixo: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`,
+  esgoto: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 2v6"/><path d="M8 8l8 0"/><path d="M12 12v6"/><path d="M8 18l8 0"/><path d="M4 12a8 8 0 0 0 16 0"/></svg>`,
+  calcada: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 10h16M4 14h16M10 6v4M14 14v4M8 14v4M16 6v4"/></svg>`,
+  sinalizacao: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`,
+  alagamento: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M2 12c2 0 4 2 6 2s4-2 6-2 4 2 6 2M2 18c2 0 4 2 6 2s4-2 6-2 4 2 6 2"/></svg>`,
+  mato: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 22V12"/><path d="M12 12c-2-2-4-4-2-6 2-2 4-2 4-2s2 0 4 2c2 2 0 4-2 6-2 2-4 4-4 4z"/></svg>`,
+  alerta: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+  default: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`
+};
 
 /** Mapeamento de emoji por tipo de ocorrência */
 const CATEGORY_ICONS = {
-  'buraco na via':          '🕳️',
-  'iluminacao publica':     '💡',
-  'iluminação pública':     '💡',
-  'lixo acumulado':         '🗑️',
-  'esgoto a ceu aberto':    '🚰',
-  'esgoto a céu aberto':   '🚰',
-  'calcada danificada':     '🧱',
-  'calçada danificada':     '🧱',
-  'falta de sinalizacao':   '🚦',
-  'falta de sinalização':   '🚦',
-  'alagamento':             '🌊',
-  'mato alto':              '🌿',
-  'poluicao sonora':        '🔊',
-  'poluição sonora':        '🔊',
-  'abandono de imovel':     '🏚️',
-  'abandono de imóvel':     '🏚️',
+  'buraco na via':          svgs.buraco,
+  'iluminacao publica':     svgs.luz,
+  'iluminação pública':     svgs.luz,
+  'lixo acumulado':         svgs.lixo,
+  'esgoto a ceu aberto':    svgs.esgoto,
+  'esgoto a céu aberto':   svgs.esgoto,
+  'calcada danificada':     svgs.calcada,
+  'calçada danificada':     svgs.calcada,
+  'falta de sinalizacao':   svgs.sinalizacao,
+  'falta de sinalização':   svgs.sinalizacao,
+  'alagamento':             svgs.alagamento,
+  'mato alto':              svgs.mato,
+  'area de risco / inseguranca': svgs.alerta,
+  "falta d'agua":           svgs.esgoto,
+  'assalto':                svgs.alerta,
+  'abandono de imovel':     svgs.alerta,
+  'abandono de imóvel':     svgs.alerta,
 };
-const DEFAULT_ICON = '📍';
+const DEFAULT_ICON = svgs.default;
 
 
 // ==========================================
@@ -142,10 +157,9 @@ function initMap() {
     attributionControl: false
   });
 
-  // Tiles OpenStreetMap — gratuito e sem watermark
-  // O efeito dark é aplicado via filtro CSS no container do mapa (veja style.css)
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+  // Stadia Alidade Smooth Dark (não exige API key em localhost)
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
     maxZoom: MAP_CONFIG.maxZoom
   }).addTo(map);
 
@@ -307,11 +321,11 @@ function initCharts() {
       datasets: [{
         label: 'Ocorrências',
         data: [],
-        borderColor: '#00d4aa',
-        backgroundColor: 'rgba(0, 212, 170, 0.10)',
+        borderColor: '#c2542f',
+        backgroundColor: 'rgba(194, 84, 47, 0.10)',
         borderWidth: 2,
-        pointBackgroundColor: '#00d4aa',
-        pointBorderColor: '#0a0f18',
+        pointBackgroundColor: '#c2542f',
+        pointBorderColor: '#1c1917',
         pointBorderWidth: 2,
         pointRadius: 5,
         pointHoverRadius: 7,
@@ -422,31 +436,20 @@ function updateLegend(labels, colors) {
  */
 async function fetchAndRender() {
   try {
-    const csvText = await fetchCSV();
-    const rawData = parseCSV(csvText);
-    const filtered = await filterValidRecords(rawData);
-
+    // Forçando o uso dos dados mockados localmente
+    const fallbackData = await fetchFallbackJSON();
+    
+    // Passa pelo filtro para garantir que as coordenadas fiquem corretas
+    const filtered = await filterValidRecords(fallbackData);
+    
     currentData = filtered;
-    isOffline = false;
+    isOffline = true; // Mantém como offline para indicar que é mock
 
     updateUI(filtered);
-    setOnlineStatus(true);
+    setOnlineStatus(false); // Mostra o banner de offline/teste
 
-  } catch (error) {
-    console.warn('[Jardim Digital] Erro ao buscar CSV, tentando fallback...', error);
-
-    try {
-      const fallbackData = await fetchFallbackJSON();
-      currentData = fallbackData;
-      isOffline = true;
-
-      updateUI(fallbackData);
-      setOnlineStatus(false);
-
-    } catch (fallbackError) {
-      console.error('[Jardim Digital] Fallback também falhou:', fallbackError);
-      setOnlineStatus(false);
-    }
+  } catch (err) {
+    console.error('[Jardim Digital] Falha ao carregar dados mockados:', err);
   }
 }
 
@@ -483,7 +486,8 @@ async function fetchCSV() {
  * Busca o JSON de fallback local.
  */
 async function fetchFallbackJSON() {
-  const response = await fetch(FALLBACK_JSON);
+  const url = `${FALLBACK_JSON}?t=${Date.now()}`;
+  const response = await fetch(url, { cache: 'no-store' });
   if (!response.ok) {
     throw new Error(`Fallback JSON: HTTP ${response.status}`);
   }
