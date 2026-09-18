@@ -422,31 +422,20 @@ function updateLegend(labels, colors) {
  */
 async function fetchAndRender() {
   try {
-    const csvText = await fetchCSV();
-    const rawData = parseCSV(csvText);
-    const filtered = await filterValidRecords(rawData);
-
+    // Forçando o uso dos dados mockados localmente
+    const fallbackData = await fetchFallbackJSON();
+    
+    // Passa pelo filtro para garantir que as coordenadas fiquem corretas
+    const filtered = await filterValidRecords(fallbackData);
+    
     currentData = filtered;
-    isOffline = false;
+    isOffline = true; // Mantém como offline para indicar que é mock
 
     updateUI(filtered);
-    setOnlineStatus(true);
+    setOnlineStatus(false); // Mostra o banner de offline/teste
 
-  } catch (error) {
-    console.warn('[Jardim Digital] Erro ao buscar CSV, tentando fallback...', error);
-
-    try {
-      const fallbackData = await fetchFallbackJSON();
-      currentData = fallbackData;
-      isOffline = true;
-
-      updateUI(fallbackData);
-      setOnlineStatus(false);
-
-    } catch (fallbackError) {
-      console.error('[Jardim Digital] Fallback também falhou:', fallbackError);
-      setOnlineStatus(false);
-    }
+  } catch (err) {
+    console.error('[Jardim Digital] Falha ao carregar dados mockados:', err);
   }
 }
 
@@ -483,7 +472,8 @@ async function fetchCSV() {
  * Busca o JSON de fallback local.
  */
 async function fetchFallbackJSON() {
-  const response = await fetch(FALLBACK_JSON);
+  const url = `${FALLBACK_JSON}?t=${Date.now()}`;
+  const response = await fetch(url, { cache: 'no-store' });
   if (!response.ok) {
     throw new Error(`Fallback JSON: HTTP ${response.status}`);
   }
