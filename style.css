@@ -87,7 +87,7 @@ body {
 /* ---------- Layout Principal ---------- */
 #app {
   display: grid;
-  grid-template-rows: var(--header-height) 1fr auto;
+  grid-template-rows: auto 1fr auto;
   height: 100vh;
   width: 100vw;
 }
@@ -97,25 +97,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 16px 24px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
   position: relative;
-}
-
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent,
-    var(--accent-glow),
-    transparent
-  );
 }
 
 .header__brand {
